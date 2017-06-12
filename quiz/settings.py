@@ -14,7 +14,7 @@ SECRET_KEY = 'r$bunat4w*gf^iftt#sm4es6i+h2d96t4up1-@%%vamhi(&-3m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [".herokuapp.com", "127.0.0.1"]
 
 APPEND_SLASH = True
 
