@@ -8,7 +8,7 @@ from .settings import STATIC_ROOT
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^static/(?P<path>.*)$', name='django.views.static.serve', kwargs={'document_root': STATIC_ROOT}),
+    url(r'^static/(?P<path>.*)$', view='django.views.static.serve', kwargs={'document_root': STATIC_ROOT}),
     url(r'^nested_admin/', include('nested_admin.urls')),
     url(r'^login/$',
         view=user_login,
