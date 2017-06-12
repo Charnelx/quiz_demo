@@ -3,12 +3,12 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from simple_quiz.views import QuizListView, QuizDetailView, CategoriesListView, CategoryDetailView, HomePageView, QuestionView
 from authentific.views import user_login, user_register
-import settings
+from .settings import STATIC_ROOT
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^static/(?P<path>.*)$', name='django.views.static.serve', kwargs={'document_root': settings.STATIC_ROOT}),
+    url(r'^static/(?P<path>.*)$', name='django.views.static.serve', kwargs={'document_root': STATIC_ROOT}),
     url(r'^nested_admin/', include('nested_admin.urls')),
     url(r'^login/$',
         view=user_login,
