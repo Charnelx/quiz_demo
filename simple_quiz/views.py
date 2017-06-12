@@ -76,6 +76,11 @@ class QuizDetailView(DetailView):
 
         # trick to append into session list
         exclude_questions = request.session['used_questions']
+
+        # User come back to previous page
+        if question_id in exclude_questions:
+            points = 0
+
         exclude_questions.append(question_id)
         request.session['used_questions'] = exclude_questions
 
