@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}{{ quiz.title }}{% endblock %}
+
+{% block content %}
+<div class="content question-container">
+    <div class="list-group">
+        <h2>{{ quiz.title }}</h2>
+    </div>
+    <h4><strong>Categories:</strong></h4>
+    <div class="list-group">
+        {% for category in quiz.quizzes.all %}
+                <a href="{% url 'category_detail' slug=category.slug %}" class="list-group-item">
+                    {{ category }}
+                </a>
+        {% endfor %}
+    </div>
+    <h4><strong>Description:</strong> {{ quiz.description }}</h4>
+    <div class="list-group">
+        <a href="{{ question }}"><input class="btn btn-warning" type="submit" value="Start test"/></a>
+    </div>
+</div>
+{% endblock %}

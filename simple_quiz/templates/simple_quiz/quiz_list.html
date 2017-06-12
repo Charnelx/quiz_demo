@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}All quizzes{% endblock %}
+
+{% block content %}
+  {% with object_list as quizzes %}
+  <div class="content question-container">
+    <h1>Quizzes list</h1>
+    {% if quizzes %}
+        <div class="list-group">
+        {% for quiz in quizzes %}
+              <a href="{% url 'quiz_start_page' slug=quiz.slug %}" class="list-group-item">
+                {{ quiz.title }}
+              </a>
+        {% endfor %}
+        </div>
+    {% else %}
+        <p>There are no quizzes available</p>
+    {% endif %}
+  </div>
+  {% endwith %}
+{% endblock %}

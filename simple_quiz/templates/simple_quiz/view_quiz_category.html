@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Category - {{ category.category }}{% endblock %}
+
+{% block content %}
+    {% if category %}
+    <div class="content question-container">
+        <h1>Category: <strong>{{ category.name }}</strong></h1>
+        <h3>Related quizzes</h3>
+        {% if quizzes %}
+            <div class="list-group">
+                {% for quiz in quizzes %}
+                        <a href="{% url 'quiz_start_page' slug=quiz.slug %}" class="list-group-item">
+                            {{ quiz.title }}
+                        </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No quizzes in this category</p>
+        {% endif %}
+    {% else %}
+        <p>There are no quizzes available</p>
+    {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}All Quizzes{% endblock %}
+
+{% block content %}
+<div class="content question-container">
+    <h2>Categories list</h2>
+    <div class="list-group">
+      {% for category in category_list %}
+        <a href="{% url 'category_detail' slug=category.slug %}" class="list-group-item">
+          {{ category.name }}
+        </a>
+      {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
