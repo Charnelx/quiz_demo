@@ -1,6 +1,7 @@
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
+from django.views.static import serve
 from simple_quiz.views import QuizListView, QuizDetailView, CategoriesListView, CategoryDetailView, HomePageView, QuestionView
 from authentific.views import user_login, user_register
 from .settings import STATIC_ROOT
@@ -8,7 +9,7 @@ from .settings import STATIC_ROOT
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^static/(?P<path>.*)$', view='django.views.static.serve', kwargs={'document_root': STATIC_ROOT}),
+    url(r'^static/(?P<path>.*)$', view=serve, kwargs={'document_root': STATIC_ROOT}),
     url(r'^nested_admin/', include('nested_admin.urls')),
     url(r'^login/$',
         view=user_login,
