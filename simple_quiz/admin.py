@@ -49,6 +49,7 @@ class QuestionInline(nested_admin.NestedStackedInline):
 
 
 class QuizAdminForm(forms.ModelForm):
+
     class Meta:
         model = Quiz
         exclude = []
@@ -64,6 +65,7 @@ class QuizAdminForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['title'].error_messages['required'] = 'You should specify unique name for the quiz'
         if self.instance.pk:
             self.fields['quizzes'].initial = \
                 self.instance.quizzes.all()
@@ -74,6 +76,11 @@ class QuizAdminForm(forms.ModelForm):
         quiz.quizzes = self.cleaned_data['quizzes']
         self.save_m2m()
         return quiz
+
+    def clean(self):
+        super().clean()
+        if not self.is_valid():
+            return
 
 
 class CategoryAdminForm(forms.ModelForm):
@@ -96,7 +103,7 @@ class QuizAdmin(nested_admin.NestedModelAdmin):
     form = QuizAdminForm
 
     list_display = ('creation_date', 'title', '_categories', 'allow_anonymous', 'is_published',)
-    list_filter = ('quizzes__name', 'allow_anonymous', 'allow_anonymous',)
+    list_filter = ('quizzes__name', 'allow_anonymous',)
     search_fields = ('description', 'category', )
     readonly_fields = ('_questions',)
     inlines = [QuestionInline]
